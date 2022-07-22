@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/ihrm_common_model/ihrm_common_model.iml" filepath="$PROJECT_DIR$/ihrm_common_model/ihrm_common_model.iml" />
       <module fileurl="file://$PROJECT_DIR$/ihrm_company/ihrm_company.iml" filepath="$PROJECT_DIR$/ihrm_company/ihrm_company.iml" />
       <module fileurl="file://$PROJECT_DIR$/ihrm_parent.iml" filepath="$PROJECT_DIR$/ihrm_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ihrm_system/ihrm_system.iml" filepath="$PROJECT_DIR$/ihrm_system/ihrm_system.iml" />
     </modules>
   </component>
 </project>
