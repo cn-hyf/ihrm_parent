@@ -27,6 +27,6 @@ public class PermissionMenu implements Serializable {
     //展示图标
     private String menuIcon;
 
-    //排序号
+    //排序号，菜单可能有顺序
     private String menuOrder;
 }

@@ -38,7 +38,7 @@ public class Permission implements Serializable {
     private Integer type;
 
     /**
-     * 权限标志
+     * 权限标志(在做权限控制的时候，不管是前端的菜单还是后端的api或者是按钮的配置，都是通过code进行比较来判断当前用户是否包含当前权限，如果有就过，没有就拦截)
      */
     private String code;
 
@@ -55,6 +55,9 @@ public class Permission implements Serializable {
      */
     private String pid;
 
+    /**
+     * 可见状态
+     */
     private Integer enVisible;
 
     public Permission(String name, Integer type, String code, String description) {
