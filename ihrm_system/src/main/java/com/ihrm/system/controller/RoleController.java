@@ -23,21 +23,6 @@ public class RoleController extends BaseController{
     @Autowired
     private RoleService roleService;
 
-    /**
-     * 分配权限
-     */
-    @RequestMapping(value = "/role/assignPrem", method = RequestMethod.PUT)
-    public Result save(@RequestBody Map<String,Object> map) {
-        //1.获取被分配的角色的id
-        String roleId = (String) map.get("id");
-        //2.获取到权限的id列表
-        List<String> permIds = (List<String>) map.get("permIds");
-        //3.调用service完成权限分配
-        roleService.assignPerms(roleId,permIds);
-        return new Result(ResultCode.SUCCESS);
-    }
-
-
     //添加角色
     @RequestMapping(value = "/role", method = RequestMethod.POST)
     public Result add(@RequestBody Role role) throws Exception {
@@ -80,9 +65,24 @@ public class RoleController extends BaseController{
         return new Result(ResultCode.SUCCESS,pr);
     }
 
+    //查询角色列表
     @RequestMapping(value="/role/list" ,method=RequestMethod.GET)
     public Result findAll() throws Exception {
         List<Role> roleList = roleService.findAll(companyId);
         return new Result(ResultCode.SUCCESS,roleList);
+    }
+
+    /**
+     * 给角色分配权限
+     */
+    @RequestMapping(value = "/role/assignPrem", method = RequestMethod.PUT)
+    public Result save(@RequestBody Map<String,Object> map) {
+        //1.获取被分配的角色的id
+        String roleId = (String) map.get("id");
+        //2.获取到权限的id列表
+        List<String> permIds = (List<String>) map.get("permIds");
+        //3.调用service完成权限分配
+        roleService.assignPerms(roleId,permIds);
+        return new Result(ResultCode.SUCCESS);
     }
 }
