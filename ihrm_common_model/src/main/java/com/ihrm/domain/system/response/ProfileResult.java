@@ -24,6 +24,7 @@ public class ProfileResult {
         this.username = user.getUsername();
         this.company = user.getCompanyName();
 
+        //角色数据
         Set<Role> roles = user.getRoles();
         Set<String> menus = new HashSet<>();
         Set<String> points = new HashSet<>();

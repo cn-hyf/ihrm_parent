@@ -1,6 +1,7 @@
 package com.ihrm.system;
 
 import com.ihrm.common.utils.IdWorker;
+import com.ihrm.common.utils.JwtUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -22,5 +23,11 @@ public class SystemApplication {
     @Bean
     public IdWorker idWorker() {
         return new IdWorker();
+    }
+
+    //  引入Jwt进项目，然后就可以通过Autowired注入了
+    @Bean
+    public JwtUtils jwtUtil(){
+        return new JwtUtils();
     }
 }

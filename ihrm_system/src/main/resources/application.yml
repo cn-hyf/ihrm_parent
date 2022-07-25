@@ -17,3 +17,9 @@ spring:
     database: MySQL
     show-sql: true
     open-in-view: true
+  jwt:
+    config:
+      key: saas-hyf # 密钥
+      ttl: 3600000  #超时时间1个小时
+
+
