@@ -2,20 +2,25 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ihrm_common_model" />
-        <module name="ihrm_company" />
-        <module name="ihrm_common" />
         <module name="ihrm_system" />
+        <module name="ihrm_eureka" />
+        <module name="ihrm_company" />
+        <module name="ihrm_common_model" />
+        <module name="ihrm_common" />
+        <module name="ihrm_gate" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ihrm_common" target="1.8" />
       <module name="ihrm_common_model" target="1.8" />
       <module name="ihrm_company" target="1.8" />
+      <module name="ihrm_eureka" target="1.8" />
+      <module name="ihrm_gate" target="1.8" />
       <module name="ihrm_parent" target="1.8" />
       <module name="ihrm_system" target="1.8" />
     </bytecodeTargetLevel>
@@ -25,6 +30,8 @@
       <module name="ihrm_common" options="-parameters" />
       <module name="ihrm_common_model" options="-parameters" />
       <module name="ihrm_company" options="-parameters" />
+      <module name="ihrm_eureka" options="-parameters" />
+      <module name="ihrm_gate" options="-parameters" />
       <module name="ihrm_system" options="-parameters" />
     </option>
   </component>

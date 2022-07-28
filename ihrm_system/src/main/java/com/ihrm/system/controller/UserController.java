@@ -133,7 +133,7 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 用户登录
+     * 用户登录，需要打开redis服务
      *  1.通过service根据mobile查询用户
      *  2.比较password
      *  3.生成jwt信息
