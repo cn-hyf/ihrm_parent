@@ -4,14 +4,6 @@ import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 
-/**
- * 主键id生成方案：
- *      1.数据库自增
- *      2.uuid
- *      3.借助全局redis
- *      4.雪花算法
- */
-
 //雪花算法代码实现
 public class IdWorker {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）

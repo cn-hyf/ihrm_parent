@@ -92,12 +92,23 @@ public class User implements Serializable {
 
     private String departmentName;
 
+    /**
+     * level
+     *     String
+     *          saasAdmin：saas管理员具备所有权限
+     *          coAdmin：企业管理（创建租户企业的时候添加）
+     *          user：普通用户（需要分配角色）
+     */
+    private String level;
 
+    /**
+     *  JsonIgnore
+     *     : 忽略json转化
+     */
+    @JsonIgnore
     @ManyToMany
-    @JsonIgnore     //忽略json转化，(如果这这样的话，user会对role进行json转化，而role也会对user转化json转化，会造成死循环)
-    @JoinTable(name="pe_user_role",     //中间表
-            joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},    //user_id是中间表pe_user_role的字段，id是user表的字段
-            inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")}  //role_id是中间表pe_user_role的字段，id是role表的字段
+    @JoinTable(name="pe_user_role",joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")}
     )
     private Set<Role> roles = new HashSet<Role>();//用户与角色   多对多
 }

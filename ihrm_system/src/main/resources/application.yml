@@ -17,9 +17,10 @@ spring:
     database: MySQL
     show-sql: true
     open-in-view: true
-  jwt:
-    config:
-      key: saas-hyf # 密钥
-      ttl: 3600000  #超时时间1个小时
-
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+jwt:
+  config:
+    key: saas-ihrm
+    ttl: 3600000

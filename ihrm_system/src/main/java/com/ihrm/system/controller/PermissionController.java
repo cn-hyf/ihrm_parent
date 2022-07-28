@@ -1,17 +1,18 @@
 package com.ihrm.system.controller;
 
+import com.ihrm.common.entity.PageResult;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.domain.system.Permission;
+import com.ihrm.domain.system.User;
 import com.ihrm.system.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 
-/**
- * 权限管理
- */
 //1.解决跨域
 @CrossOrigin
 //2.声明restContoller

@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,8 +30,6 @@ public class DepartmentService extends BaseService {
         //设置主键的值
         String id = idWorker.nextId()+"";
         department.setId(id);
-        Date date = new Date();
-        department.setCreateTime(date);
         //调用dao保存部门
         departmentDao.save(department);
     }

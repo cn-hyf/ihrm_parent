@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * api权限实体类
  */
 @Entity
 @Table(name = "pe_permission_api")

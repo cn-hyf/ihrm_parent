@@ -35,7 +35,7 @@ public class RoleService extends BaseService {
     private PermissionDao permissionDao;
 
     /**
-     * 给角色分配权限
+     * 分配权限
      */
     public void assignPerms(String roleId,List<String> permIds) {
         //1.获取分配的角色对象

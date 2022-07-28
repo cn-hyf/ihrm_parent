@@ -2,11 +2,15 @@ package com.ihrm.domain.system.response;
 
 import com.ihrm.domain.system.Permission;
 import com.ihrm.domain.system.Role;
+import com.ihrm.domain.system.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
+
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter

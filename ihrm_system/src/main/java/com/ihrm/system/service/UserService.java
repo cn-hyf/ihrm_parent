@@ -5,16 +5,19 @@ import com.ihrm.domain.system.Role;
 import com.ihrm.domain.system.User;
 import com.ihrm.system.dao.RoleDao;
 import com.ihrm.system.dao.UserDao;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.lang.annotation.Target;
 import java.util.*;
 
 @Service
@@ -29,14 +32,24 @@ public class UserService {
     @Autowired
     private IdWorker idWorker;
 
+
+    /**
+     * 根据mobile查询用户
+     */
+    public User findByMobile(String mobile) {
+        return userDao.findByMobile(mobile);
+    }
+
     /**
      * 1.保存用户
      */
     public void save(User user) {
         //设置主键的值
         String id = idWorker.nextId()+"";
-        user.setPassword("123456");//设置初始密码
-        user.setEnableState(1); //默认设置为启用状态
+        String password = new Md5Hash("123456",user.getMobile(),3).toString();
+        user.setLevel("user");
+        user.setPassword(password);//设置初始密码
+        user.setEnableState(1);
         user.setId(id);
         //调用dao保存部门
         userDao.save(user);
@@ -65,11 +78,11 @@ public class UserService {
     }
 
     /**
-     * 4.全部用户列表，参数使用map集合（分页查询，动态拼接查询条件）
-     *      参数：map集合的形式，里面可能含有如下参数
-     *          hasDept：是否分配部门，0未分配，1已分配
-     *          departmentId：部门id
-     *          companyId：企业id
+     * 4.查询全部用户列表
+     *      参数：map集合的形式
+     *          hasDept
+     *          departmentId
+     *          companyId
      *
      */
     public Page findAll(Map<String,Object> map,int page, int size) {
@@ -97,11 +110,12 @@ public class UserService {
                         list.add(criteriaBuilder.isNotNull(root.get("departmentId")));
                     }
                 }
-                return criteriaBuilder.and(list.toArray(new Predicate[list.size()]));//把查询条件封装成Predicate数组
+                return criteriaBuilder.and(list.toArray(new Predicate[list.size()]));
             }
         };
+
         //2.分页
-        Page<User> pageUser = userDao.findAll(spec, new PageRequest(page-1, size));//page默认是从0开始，而我们传递过来的是1。所以需要减1.
+        Page<User> pageUser = userDao.findAll(spec, new PageRequest(page-1, size));
         return pageUser;
     }
 
@@ -112,9 +126,8 @@ public class UserService {
         userDao.deleteById(id);
     }
 
-
     /**
-     * 给员工分配角色
+     * 分配角色
      */
     public void assignRoles(String userId,List<String> roleIds) {
         //1.根据id查询用户
@@ -129,10 +142,5 @@ public class UserService {
         user.setRoles(roles);
         //3.更新用户
         userDao.save(user);
-    }
-
-    //根据手机号查找用户
-    public User findByMobile(String mobile) {
-        return userDao.findByMobile(mobile);
     }
 }

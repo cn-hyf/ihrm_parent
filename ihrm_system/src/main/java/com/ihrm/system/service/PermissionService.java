@@ -9,6 +9,8 @@ import com.ihrm.domain.system.*;
 import com.ihrm.system.dao.*;
 import com.ihrm.system.dao.PermissionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +43,7 @@ public class PermissionService {
     private IdWorker idWorker;
 
     /**
-     * 1.保存权限,1.上一次的提交不仅操作了角色，还包含权限操作。根据权限表操作的type类型，操作其他三张表的增删改查，如菜单表、按钮、api表。
+     * 1.保存权限
      */
     public void save(Map<String,Object> map) throws Exception {
         //设置主键的值
@@ -131,13 +133,17 @@ public class PermissionService {
         }else {
             throw new CommonException(ResultCode.FAIL);
         }
+
         Map<String, Object> map = BeanMapUtils.beanToMap(object);
+
         map.put("name",perm.getName());
         map.put("type",perm.getType());
         map.put("code",perm.getCode());
         map.put("description",perm.getDescription());
         map.put("pid",perm.getPid());
         map.put("enVisible",perm.getEnVisible());
+
+
         return map;
     }
 
@@ -156,15 +162,15 @@ public class PermissionService {
              */
             public Predicate toPredicate(Root<Permission> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> list = new ArrayList<>();
-                //1.根据父id查询
+                //根据父id查询
                 if(!StringUtils.isEmpty(map.get("pid"))) {
                     list.add(criteriaBuilder.equal(root.get("pid").as(String.class),(String)map.get("pid")));
                 }
-                //2.根据enVisible查询
+                //根据enVisible查询
                 if(!StringUtils.isEmpty(map.get("enVisible"))) {
                     list.add(criteriaBuilder.equal(root.get("enVisible").as(String.class),(String)map.get("enVisible")));
                 }
-                //3.根据类型 type
+                //根据类型 type
                 if(!StringUtils.isEmpty(map.get("type"))) {
                     String ty = (String) map.get("type");
                     CriteriaBuilder.In<Object> in = criteriaBuilder.in(root.get("type"));
@@ -191,7 +197,7 @@ public class PermissionService {
         //1.通过传递的权限id查询权限
         Permission permission = permissionDao.findById(id).get();
         permissionDao.delete(permission);
-        //2.根据类型删除不同的的资源表，如菜单、按钮、api
+        //2.根据类型构造不同的资源
         int type = permission.getType();
         switch (type) {
             case PermissionConstants.PERMISSION_MENU:

@@ -1,5 +1,6 @@
 package com.ihrm.common.utils;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -16,12 +17,12 @@ import java.util.Map;
 @ConfigurationProperties("jwt.config")
 public class JwtUtils {
     //签名私钥
-    private String key;     //在application.yml中配置
+    private String key;
     //签名的失效时间
     private Long ttl;
 
     /**
-     * 设置认证token,生成token
+     * 设置认证token
      *      id:登录用户id
      *      subject：登录用户名
      *

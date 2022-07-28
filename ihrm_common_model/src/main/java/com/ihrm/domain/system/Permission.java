@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * 权限实体类，与后面的api、菜单、按钮权限都是一对一关系。
- */
 @Entity
 @Table(name = "pe_permission")
 @Getter
@@ -38,7 +35,7 @@ public class Permission implements Serializable {
     private Integer type;
 
     /**
-     * 权限标志(在做权限控制的时候，不管是前端的菜单还是后端的api或者是按钮的配置，都是通过code进行比较来判断当前用户是否包含当前权限，如果有就过，没有就拦截)
+     * 权限编码
      */
     private String code;
 
@@ -47,18 +44,10 @@ public class Permission implements Serializable {
      */
     private String description;
 
-    /**
-     * 一个权限
-     *      菜单权限 对应 多个权限
-     *      菜单 对应 api权限
-     *      按钮 对应 api权限
-     */
     private String pid;
 
-    /**
-     * 可见状态
-     */
-    private Integer enVisible;
+    //可见状态
+    private String enVisible;
 
     public Permission(String name, Integer type, String code, String description) {
         this.name = name;
